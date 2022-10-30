@@ -21,9 +21,6 @@ async def weather(loc: Location = Depends(), units: Optional[str] = 'metric'):
 
 @router.get('/api/reports', name='all_reports')
 async def reports() -> List[Report]:
-    # For testing purposes, we'll just return the reports in memory.
-    # await reports_service.add_report('Test', Location(city='London', country='UK'))
-    # await reports_service.add_report('Test2', Location(city='Lviv', country='UA'))
     return await reports_service.get_reports()
 
 
