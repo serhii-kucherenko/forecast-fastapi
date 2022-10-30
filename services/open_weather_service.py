@@ -1,13 +1,11 @@
 from typing import Optional, Tuple
-
 import httpx
-import requests
 from httpx import Response
+import requests
 
+from config import settings
 from infrastructure import weather_cache
 from models.validation_error import ValidationError
-
-api_key: Optional[str] = None
 
 
 def get_report(city: str, state: Optional[str], country: str, units: str) -> dict:
@@ -18,7 +16,7 @@ def get_report(city: str, state: Optional[str], country: str, units: str) -> dic
     else:
         q = f'{city},{country}'
 
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={q}&units={units}&appid={api_key}"
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={q}&units={units}&appid={settings.api_key}"
     response = requests.get(url)
     response.raise_for_status()
     data = response.json()
@@ -38,7 +36,7 @@ async def get_report_async(city: str, state: Optional[str], country: str, units:
     else:
         q = f'{city},{country}'
 
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={q}&units={units}&appid={api_key}"
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={q}&units={units}&appid={settings.api_key}"
 
     async with httpx.AsyncClient() as client:
         response: Response = await client.get(url)
