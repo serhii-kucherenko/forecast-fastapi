@@ -43,6 +43,22 @@
     </ul>
     </p>
 
+    <hr />
+
+    <div>
+        <h2>Recent weather events</h2>
+    {% if reports %}
+        <ul>
+            {% for e in reports %}
+            <li> {{ e.location.city }}, {{ e.location.country }}: {{ e.description }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% if not reports %}
+        <p>No weather events yet.</p>
+    {% endif %}
+    </div>
+
     </div>
 
 {% endblock %}
