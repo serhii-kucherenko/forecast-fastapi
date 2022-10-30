@@ -19,11 +19,11 @@ async def weather(loc: Location = Depends(), units: Optional[str] = 'metric'):
         return fastapi.Response(content=str(ex), status_code=500)
 
 
-@router.get('/api/reports', name='all_reports')
+@router.get('/api/reports', name='all_reports', response_model=List[Report])
 async def reports() -> List[Report]:
     return await reports_service.get_reports()
 
 
-@router.post('/api/reports', name='add_report', status_code=201)
+@router.post('/api/reports', name='add_report', status_code=201, response_model=Report)
 async def add_report(report: ReportSubmittal) -> Report:
     return await reports_service.add_report(description=report.description, location=report.location)
