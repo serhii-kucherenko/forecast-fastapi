@@ -1,3 +1,4 @@
+import uuid
 from typing import List
 
 from models.location import Location
@@ -7,13 +8,15 @@ __reports: List[Report] = []
 
 
 async def get_reports() -> List[Report]:
-
     # Would be an async call here.
     return list(__reports)
 
 
-async def add_report(description:str, locations: Location) -> Report:
-    report = Report(description=description, location=locations)
+async def add_report(description:str, location: Location) -> Report:
+    report = Report(
+        id=str(uuid.uuid4()),
+        description=description,
+        location=location)
 
     # Simulate saving to DB.
     # Would be an async call here.
