@@ -20,3 +20,6 @@ venv
 docs.zip
 archive.zip
 .env
+.vercel
+.DS_Store
+.deta

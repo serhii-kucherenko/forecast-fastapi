@@ -24,7 +24,13 @@ def configure_routing():
 # In development
 if __name__ == '__main__':
     configure()
-    uvicorn.run(app, port=8000, host='127.0.0.1')
+    uvicorn.run(
+        app,
+        host="0.0.0.0",
+        workers=4,
+        port=8000,
+        reload=True,
+        log_level="debug")
 # In production
 else:
     configure()
